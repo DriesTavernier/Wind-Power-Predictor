@@ -8,7 +8,7 @@ import src.SplitTrainTestData
 import src.LinearRegression
 import src.NeuralNetwork
 
-from src.evaluate_performance import plot_power_curve, evaluate_model
+from src.EvaluatePerformance import plot_power_curve, evaluate_model
 
 # Evaluatie
 Y = "LV ActivePower (kW)"
