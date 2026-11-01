@@ -4,13 +4,14 @@ Created on Sat Oct 31 15:32:35 2026
 
 @author: dries
 """
-
+from pathlib import Path
+ROOT = Path(__file__).resolve().parent.parent
 import pandas as pd
 from sklearn.linear_model import LinearRegression
 
 
-data_train = pd.read_csv("../data/clean/wind_turbine_scada_train.csv")
-data_test = pd.read_csv("../data/clean/wind_turbine_scada_test.csv")
+data_train = pd.read_csv(ROOT / "data" / "clean" / "wind_turbine_scada_train.csv")
+data_test = pd.read_csv(ROOT / "data" / "clean" / "wind_turbine_scada_test.csv")
 # =====================================================================
 # 1. Select columns to predicts and to predict on
 # =====================================================================
@@ -42,6 +43,6 @@ y_pred = model.predict(data_test_x)
 data_test['predicted'] = y_pred
 
 data_test.to_csv(
-    "../data/clean/wind_turbine_scada_test_lm.csv",
+    ROOT / "data" / "clean" / "wind_turbine_scada_test_lm.csv",
     index=False
 )

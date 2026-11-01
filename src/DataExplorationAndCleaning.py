@@ -1,4 +1,5 @@
-
+from pathlib import Path
+ROOT = Path(__file__).resolve().parent.parent
 import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np
@@ -7,7 +8,7 @@ import numpy as np
 # 1. DATA LOADING & QUALITY CHECK
 # ============================================
 
-data = pd.read_csv("../data/raw/wind_turbine_scada.csv")
+data = pd.read_csv(ROOT / "data" / "raw" / "wind_turbine_scada.csv")
 
 print("\n--- DATASET OVERVIEW ---")
 print(f"Dataset shape: {data.shape}")
@@ -149,7 +150,7 @@ data_clean = data_clean.reset_index(drop=True)
 
 # Export cleaned dataset
 data_clean.to_csv(
-    "../data/clean/wind_turbine_scada_clean.csv",
+    ROOT / "data" / "clean" / "wind_turbine_scada_clean.csv",
     index=False
 )
 

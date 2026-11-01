@@ -4,13 +4,15 @@ Created on Sat Oct 31 13:34:48 2026
 
 @author: dries
 """
+from pathlib import Path
+ROOT = Path(__file__).resolve().parent.parent
 import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np
 # ============================================
 # 1. Load data
 # ============================================
-data = pd.read_csv("../data/clean/wind_turbine_scada_clean.csv")
+data = pd.read_csv(ROOT / "data" / "clean" / "wind_turbine_scada_clean.csv")
 # Convert timestamp
 data["Date/Time"] = pd.to_datetime(
     data["Date/Time"],
@@ -94,15 +96,6 @@ plt.tight_layout()
 plt.show()
 
 
-
-
-# ============================================
-# 6. Calculate Cp 
-# ============================================
-import numpy as np
-import pandas as pd
-import matplotlib.pyplot as plt
-
 # ============================================
 # 6. Calculate Cp & Feature Engineering
 # ============================================
@@ -184,8 +177,8 @@ plt.show()
 # Reset index
 data_feature = data.reset_index(drop=True)
 
-# Export cleaned dataset
+# Export feature dataset
 data_clean_wind.to_csv(
-    "../data/clean/wind_turbine_scada_feature.csv",
+    ROOT / "data" / "clean" / "wind_turbine_scada_feature.csv",
     index=False
 )

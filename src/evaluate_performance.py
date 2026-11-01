@@ -4,6 +4,8 @@ Created on Sun Nov  1 12:57:27 2026
 
 @author: dries
 """
+from pathlib import Path
+ROOT = Path(__file__).resolve().parent.parent
 import numpy as np
 import matplotlib.pyplot as plt
 

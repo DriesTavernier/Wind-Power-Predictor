@@ -4,7 +4,8 @@
 Wind Turbine Power Prediction
 Artificial Neural Network (ANN)
 """
-
+from pathlib import Path
+ROOT = Path(__file__).resolve().parent.parent
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -13,14 +14,12 @@ from sklearn.neural_network import MLPRegressor
 from sklearn.preprocessing import StandardScaler
 from sklearn.pipeline import Pipeline
 from sklearn.compose import TransformedTargetRegressor
-from evaluate_performance import evaluate_model
-
 # =====================================================================
 # 1. LOAD DATA
 # =====================================================================
 
-data_train = pd.read_csv("../data/clean/wind_turbine_scada_train.csv")
-data_test = pd.read_csv("../data/clean/wind_turbine_scada_test.csv")
+data_train = pd.read_csv(ROOT / "data" / "clean" / "wind_turbine_scada_train.csv")
+data_test = pd.read_csv(ROOT / "data" / "clean" / "wind_turbine_scada_test.csv")
 
 
 # =====================================================================
@@ -100,7 +99,7 @@ y_pred = model.predict(X_test)
 data_test['predicted'] = y_pred
 
 data_test.to_csv(
-    "../data/clean/wind_turbine_scada_test_nn.csv",
+    ROOT / "data" / "clean" / "wind_turbine_scada_test_nn.csv",
     index=False
 )
 
