@@ -23,7 +23,7 @@ plot_power_curve(
     title="Wind Turbine Power Curve - Theoretical",
     label="Theoretical power prediction",
 )
-evaluate_model(data_theoretical[Y], data_theoretical["Theoretical_Power_Curve (KWh)"])
+evaluate_model(data_theoretical[Y], data_theoretical["Theoretical_Power_Curve (KWh)"], "THEORETICAL MODEL")
 
 plot_power_curve(
     data_lm,
@@ -31,7 +31,7 @@ plot_power_curve(
     title="Wind Turbine Power Curve - Linear Regression",
     label="Linear Regression power prediction",
 )
-evaluate_model(data_lm[Y], data_lm["predicted"])
+evaluate_model(data_lm[Y], data_lm["predicted"], 'LINEAR REGRESSION')
 
 plot_power_curve(
     data_nn,
@@ -39,4 +39,4 @@ plot_power_curve(
     title="Wind Turbine Power Curve - Neural Network",
     label="Neural Network power prediction",
 )
-evaluate_model(data_nn[Y], data_nn["predicted"])
+evaluate_model(data_nn[Y], data_nn["predicted"], 'NEURAL NETWORK')
