@@ -4,4 +4,4 @@ __pycache__/
 *.py[cod]
 .env
 .ipynb_checkpoints/
-data/raw/
+data/clean/
