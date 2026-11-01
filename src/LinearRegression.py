@@ -5,12 +5,13 @@ Created on Sat Oct 31 15:32:35 2026
 @author: dries
 """
 
-import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 from sklearn.linear_model import LinearRegression
+from evaluate_performance import evaluate_model
 
-# Inladen van jouw dataset (zoals in jouw prompt)
+
+
 data_train = pd.read_csv("../data/clean/wind_turbine_scada_train.csv")
 data_test = pd.read_csv("../data/clean/wind_turbine_scada_test.csv")
 # =====================================================================
@@ -72,5 +73,9 @@ plt.show()
 print("Coëfficiënten:", model.coef_)
 print("Intercept:", model.intercept_)
 
+# =====================================================================
+# MODEL PERFORMANCE
+# =====================================================================
+evaluate_model(data_test["LV ActivePower (kW)"], data_test["lm_predicted"],'Linear Regression')
 
 

@@ -13,12 +13,7 @@ from sklearn.neural_network import MLPRegressor
 from sklearn.preprocessing import StandardScaler
 from sklearn.pipeline import Pipeline
 from sklearn.compose import TransformedTargetRegressor
-
-from sklearn.metrics import (
-    mean_squared_error,
-    mean_absolute_error,
-    r2_score
-)
+from evaluate_performance import evaluate_model
 
 # =====================================================================
 # 1. LOAD DATA
@@ -105,19 +100,6 @@ y_pred = model.predict(X_test)
 data_test["nn_predicted"] = y_pred
 
 
-# =====================================================================
-# 6. MODEL PERFORMANCE
-# =====================================================================
-
-rmse = np.sqrt(mean_squared_error(y_test, y_pred))
-mae = mean_absolute_error(y_test, y_pred)
-r2 = r2_score(y_test, y_pred)
-
-print("\n--- NEURAL NETWORK PERFORMANCE ---")
-print(f"RMSE: {rmse:.2f} kW")
-print(f"MAE:  {mae:.2f} kW")
-print(f"R2:   {r2:.4f}")
-
 
 # =====================================================================
 # 7. ACTUAL VS THEORETICAL VS PREDICTED POWER
@@ -159,22 +141,6 @@ plt.tight_layout()
 plt.show()
 
 
-# =====================================================================
-# 8. TRAINING LOSS
-# =====================================================================
-
-plt.figure(figsize=(10, 5))
-
-plt.plot(nn.loss_curve_)
-
-plt.xlabel("Training iteration")
-plt.ylabel("Loss")
-plt.title("Neural Network Training Loss")
-
-plt.grid(alpha=0.3)
-plt.tight_layout()
-plt.show()
-
 
 # =====================================================================
 # ACTUAL VS THEORETICAL VS PREDICTED POWER CURVE
@@ -211,3 +177,9 @@ plt.legend()
 plt.grid(alpha=0.3)
 plt.tight_layout()
 plt.show()
+
+
+# =====================================================================
+# MODEL PERFORMANCE
+# =====================================================================
+evaluate_model(data_test["nn_predicted"], plot_data["LV ActivePower (kW)"])
