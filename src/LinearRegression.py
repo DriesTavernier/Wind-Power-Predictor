@@ -6,10 +6,7 @@ Created on Sat Oct 31 15:32:35 2026
 """
 
 import pandas as pd
-import matplotlib.pyplot as plt
 from sklearn.linear_model import LinearRegression
-from evaluate_performance import evaluate_model
-
 
 
 data_train = pd.read_csv("../data/clean/wind_turbine_scada_train.csv")
@@ -34,48 +31,17 @@ data_test_y = data_test[y_col]
 # =====================================================================
 model = LinearRegression()
 model.fit(X, y)
+print("Coëfficiënten:", model.coef_)
+print("Intercept:", model.intercept_)
 
 # =====================================================================
 # 4. Predict the test set
 # =====================================================================
 y_pred = model.predict(data_test_x)
-# =====================================================================
-# 4. Test accuracy
-# =====================================================================
-data_test['lm_predicted'] = y_pred
 
+data_test['predicted'] = y_pred
 
-# 3.1 Actual vs theoretical power curve
-plt.figure(figsize=(10, 6))
-plt.scatter(
-    data_test["Wind Speed (m/s)"],
-    data_test["LV ActivePower (kW)"],
-    s=5,
-    alpha=0.25,
-    label="Actual power"
+data_test.to_csv(
+    "../data/clean/wind_turbine_scada_test_lm.csv",
+    index=False
 )
-
-plt.scatter(
-    data_test["Wind Speed (m/s)"],
-    data_test["lm_predicted"],
-    s=5,
-    alpha=0.15,
-    label="predicted"
-)
-plt.xlabel("Wind speed (m/s)")
-plt.ylabel("Power (kW)")
-plt.title("Actual vs Theoretical Wind Turbine Power Curve")
-plt.legend()
-plt.grid(alpha=0.3)
-plt.tight_layout()
-plt.show()
-
-print("Coëfficiënten:", model.coef_)
-print("Intercept:", model.intercept_)
-
-# =====================================================================
-# MODEL PERFORMANCE
-# =====================================================================
-evaluate_model(data_test["LV ActivePower (kW)"], data_test["lm_predicted"],'Linear Regression')
-
-

@@ -97,89 +97,14 @@ print("Final training loss:", nn.loss_)
 
 y_pred = model.predict(X_test)
 
-data_test["nn_predicted"] = y_pred
+data_test['predicted'] = y_pred
 
-
-
-# =====================================================================
-# 7. ACTUAL VS THEORETICAL VS PREDICTED POWER
-# =====================================================================
-
-plt.figure(figsize=(10, 6))
-
-plt.scatter(
-    data_test["Wind Speed (m/s)"],
-    data_test["LV ActivePower (kW)"],
-    s=5,
-    alpha=0.25,
-    label="Actual power"
-)
-
-plt.scatter(
-    data_test["Wind Speed (m/s)"],
-    data_test["Theoretical_Power_Curve (KWh)"],
-    s=5,
-    alpha=0.25,
-    label="Theoretical power"
-)
-
-plt.scatter(
-    data_test["Wind Speed (m/s)"],
-    data_test["nn_predicted"],
-    s=5,
-    alpha=0.25,
-    label="Neural network prediction"
-)
-
-plt.xlabel("Wind speed (m/s)")
-plt.ylabel("Power (kW)")
-plt.title("Wind Turbine Power Prediction - Neural Network")
-
-plt.legend()
-plt.grid(alpha=0.3)
-plt.tight_layout()
-plt.show()
-
-
-
-# =====================================================================
-# ACTUAL VS THEORETICAL VS PREDICTED POWER CURVE
-# =====================================================================
-
-# Sort test observations by wind speed
-plot_data = data_test.sort_values("Wind Speed (m/s)")
-
-plt.figure(figsize=(10, 6))
-
-plt.scatter(
-    plot_data["Wind Speed (m/s)"],
-    plot_data["LV ActivePower (kW)"],
-    s=5,
-    alpha=0.15,
-    label="Actual power"
+data_test.to_csv(
+    "../data/clean/wind_turbine_scada_test_nn.csv",
+    index=False
 )
 
 
 
-plt.scatter(
-    plot_data["Wind Speed (m/s)"],
-    plot_data["nn_predicted"],
-    s=5,
-    alpha=0.05,
-    label="Neural network prediction"
-)
-
-plt.xlabel("Wind speed (m/s)")
-plt.ylabel("Power (kW)")
-plt.title("Wind Turbine Power Curve - Neural Network")
-
-plt.legend()
-plt.grid(alpha=0.3)
-plt.tight_layout()
-plt.show()
 
 
-# =====================================================================
-# MODEL PERFORMANCE
-# =====================================================================
-evaluate_model(data_test["nn_predicted"], plot_data["LV ActivePower (kW)"])

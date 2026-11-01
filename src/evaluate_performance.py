@@ -60,3 +60,25 @@ def evaluate_model(y_actual, y_predicted, model_name="Model", bins=60):
         "MAE": mae,
         "Bias": bias,
     }
+
+
+def plot_power_curve(
+    data,
+    col_name,
+    title,
+    label = 'model'
+):
+    plt.figure(figsize=(10, 6))
+
+    plt.scatter(data["Wind Speed (m/s)"], data["LV ActivePower (kW)"],
+                s=5, alpha=0.25, label="Actual power")
+    plt.scatter(data["Wind Speed (m/s)"], data[col_name],
+                s=5, alpha=0.05, label=label)
+
+    plt.xlabel("Wind speed (m/s)")
+    plt.ylabel("Power (kW)")
+    plt.title(title)
+    plt.legend()
+    plt.grid(alpha=0.3)
+    plt.tight_layout()
+    plt.show()

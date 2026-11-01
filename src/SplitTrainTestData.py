@@ -25,7 +25,7 @@ train_data.to_csv(
     "../data/clean/wind_turbine_scada_train.csv",
     index=False
 )
-train_data.to_csv(
+test_data.to_csv(
     "../data/clean/wind_turbine_scada_test.csv",
     index=False
 )
